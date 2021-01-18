@@ -52,6 +52,7 @@ public class Game{
 		InventoryAdv.addItem(new Material(MaterialType.CARBON));
 		InventoryAdv.addItem(new Material(MaterialType.SILICON));
 		InventoryAdv.addItem(new Material(MaterialType.HYDROGEN));
+		InventoryAdv.addMoney(100);
 		InventoryAdv.addItem(new Fighter());
 		InventoryAdv.addItem(new Protector());
 		

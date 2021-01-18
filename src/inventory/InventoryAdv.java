@@ -27,10 +27,12 @@ public class InventoryAdv {
 	private static int itemSize = 75;		// Item Sizing
 	private static int itemSpacing = 4;		// Spacing between items
 	
-	private static int matLevel = 40;		// Level to start drawing material menu (Will be adjusted based on items above it)
-	private static int shipLevel = 70;		// Level to start drawing ship menu (Adjusted based on materials above it)
-	private static int powerLevel = 100;	// Level to start drawing power up / weapons menu (To be added)
+	private static int matLevel = 70;		// Level to start drawing material menu (Will be adjusted based on items above it)
+	private static int shipLevel = 100;		// Level to start drawing ship menu (Adjusted based on materials above it)
+	private static int powerLevel = 130;	// Level to start drawing power up / weapons menu (To be added)
 
+	private static double money = 0;
+	
 	// TODO: Replace these data strctures with a Hash map and wrapping class to keep track of quantities
 	private static LinkedList<Itemizable> items = new LinkedList<Itemizable>(); // Linked list to keep track of item object
 	private static LinkedList<Integer> quantity = new LinkedList<Integer>();	// Linked list to keep track of quantity
@@ -48,6 +50,11 @@ public class InventoryAdv {
 	// Forces the inventory to hide
 	public static void hide() {
 		visible = false; // Set visible to false (This will cause the screen to skip drawing it)
+	}
+	
+	// Adds money to the players inventory
+	public static void addMoney(double amount) {
+		money = money + amount; // add desired amount of money to players inventory
 	}
 	
 	// TODO: addItem needs to be adjusted to stack items (WIll happen automatically if Hash map is implemented)
@@ -102,6 +109,10 @@ public class InventoryAdv {
 		gc.setTextAlign(TextAlignment.CENTER);
 		gc.setFont(Font.font("veranda", FontWeight.BOLD, FontPosture.REGULAR, 28));
 		gc.fillText("Inventory", x + width/2, y + border + 18);
+		
+		// Switching to smaller font to display money and sub menu titles
+		gc.setFont(Font.font("veranda", FontWeight.BOLD, FontPosture.REGULAR, 20));
+		gc.fillText("Money: " + money, x+width/2, y + border + 45);
 		
 		// Set text alignment left and lower font size to write the sub menu titles
 		gc.setTextAlign(TextAlignment.LEFT);
