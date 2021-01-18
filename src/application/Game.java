@@ -7,8 +7,10 @@ import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
 import inventory.InventoryAdv;
+import inventory.Offer;
 import items.Material;
 import items.MaterialType;
+import items.Money;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -33,7 +35,7 @@ public class Game{
 	
 	public Game() throws FileNotFoundException { //when a game is created,
 		window = new Stage(); //initalize a stage
-		window.setTitle("Cooperative Space 0.1"); //set the title of the game
+		window.setTitle("Cooperative Space"); //set the title of the game
 		window.setFullScreen(true); //set game to fullscreen 
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -79,6 +81,7 @@ public class Game{
 		earth.setSecondaryMax(200);
 		earth.setMaxHealth(1000);
 		earth.setHealth(1000);
+		earth.setOffers(new Offer(1, new Material(MaterialType.OXYGEN), 2, new Money()), new Offer(3, new Material(MaterialType.CARBON), 2, new Money()));
 
 		ScreenFocus.setScreenFocus(earth);
 		
@@ -88,7 +91,7 @@ public class Game{
 		//sprites.add(p2);
 
 		
-		//animation timer is used to animate things and run the game loop
+		//animation timemr is used to animate things and run the game loop
 		AnimationTimer frame = new AnimationTimer() { //frame is the current game frame
 			@Override
 			public void handle(long timeStamp) { //this gets called often, timeStamp is how long since last frame

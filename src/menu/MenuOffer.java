@@ -4,7 +4,7 @@ import inventory.Offer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class MenuOffer extends MenuElement{
+public class MenuOffer extends MenuElement implements Selectable{
 
 	Offer offer;
 	int vBuffer;
@@ -16,7 +16,12 @@ public class MenuOffer extends MenuElement{
 		this.y = main.getNextY();
 		vBuffer = main.getVerticalBuffer();
 		this.offer = offer;
+		main.addToSelection(this);
 		main.add(this);
+	}
+	
+	public Offer getOffer() {
+		return offer;
 	}
 	
 	@Override
@@ -67,6 +72,43 @@ public class MenuOffer extends MenuElement{
 		
 	    return ret; 
 		
+		
+	}
+
+	@Override
+	public void select() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void drawSelected(GraphicsContext gc) {
+		// TODO Auto-generated method stub
+		
+		// Save the GC
+		gc.save();
+		
+		// Set to drawing color
+		gc.setFill(Color.RED);
+		
+		// Draw the input item
+		offer.getInput().drawItemIcon(gc, x+height/2, y + vBuffer, height, height);
+		
+		// Generate and draw an arrow indicating conversion direction
+		int aw = 46;  int ah = 34; // Variables to make changing arrow position easy
+		double[][] arr=createRightArrow(x+width/2-(aw/2), y + vBuffer - (ah/2), aw, ah); // Generating arrow coordinates
+		gc.fillPolygon(arr[0], arr[1], 8); // Draws the arrow
+		
+		// Draw the output item
+		offer.getOutput().drawItemIcon(gc, x+width-height/2, y + vBuffer, height, height);
+		
+		// Return the gc to default value
+		gc.restore();		
+	}
+
+	@Override
+	public void setToolTip() {
+		// TODO Auto-generated method stub
 		
 	}
 	

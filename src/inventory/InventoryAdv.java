@@ -12,6 +12,7 @@ import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import items.Material;
+import items.Money;
 
 public class InventoryAdv {
 
@@ -31,7 +32,9 @@ public class InventoryAdv {
 	private static int shipLevel = 100;		// Level to start drawing ship menu (Adjusted based on materials above it)
 	private static int powerLevel = 130;	// Level to start drawing power up / weapons menu (To be added)
 
-	private static double money = 0;
+	//private static Money moneyItem = new Money();
+	private static Money moneyItem = new Money();
+	private static double money;
 	
 	// TODO: Replace these data strctures with a Hash map and wrapping class to keep track of quantities
 	private static LinkedList<Itemizable> items = new LinkedList<Itemizable>(); // Linked list to keep track of item object
@@ -137,7 +140,8 @@ public class InventoryAdv {
 			}
 			i++;
 		}
-		shipLevel = 70 + ((itemNum+3)/itemAccross)*(itemSize+itemSpacing) + itemSpacing;
+		
+		shipLevel = 100 + ((itemNum+3)/itemAccross)*(itemSize+itemSpacing) + itemSpacing;
 		
 		for (Itemizable item : items) {
 			if (item.getCategory() == ItemCategory.SHIP) { 

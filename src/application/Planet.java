@@ -14,16 +14,20 @@ import menu.MenuBar;
 import menu.MenuDisplay;
 import menu.MenuHorizontalIndicators;
 import menu.MenuLabel;
+import menu.MenuOffer;
 import menu.MenuSpacer;
 import menu.MenuToolTip;
 import ships.Fighter;
 import ships.Protector;
 import ships.Ship;
 import items.Material;
+import items.MaterialType;
+import items.Money;
 
 import java.util.Random;
 
 import inventory.InventoryAdv;
+import inventory.Offer;
 
 public class Planet extends Sprite implements Focusable, TakesDamage{
 
@@ -64,6 +68,7 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 	private MainMenu hangerMenu = new MainMenu("Hanger", 300, 500, 200, 400);
 
 	private LinkedList<Trade> offers = new LinkedList<Trade>();
+	private LinkedList<Offer> allOffers = new LinkedList<Offer>();
 	
 	
 	//============================= GETTERS & SETTERS ===========================
@@ -71,6 +76,13 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 	public void setOffers(Trade ... trades) {
 		for (Trade trade : trades) {
 			offers.add(trade);
+		}
+	}
+	
+	// Allows you to set the offers on the planet, can pass in as many parameters as you like
+	public void setOffers(Offer ... newOffers) {
+		for (Offer offer : newOffers) { // For each offer parameter passed in
+			allOffers.add(offer);		// Add the offer to the planet offers
 		}
 	}
 	
@@ -259,6 +271,8 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		isFriendly = true;
 		
 		setOffers(new Trade(Resource.OXYGEN, 0.5, Resource.MONEY), new Trade(Resource.CARBON, 1.5, Resource.MONEY));
+		setOffers(new Offer(1, new Material(MaterialType.OXYGEN), 2, new Material(MaterialType.OXYGEN)),
+				  new Offer(2, new Material(MaterialType.CARBON), 1, new Material(MaterialType.OXYGEN)));
 
 		hangerMenu.linkPlanet(this);
 		repairMenu.linkPlanet(this);
@@ -467,6 +481,7 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		
 		new MenuSpacer(sellMenu, 1, 14);
 
+		/*
 		LinkedList<MenuLabel> labelList = new LinkedList<MenuLabel>();
 		for (int i = 0; i < offers.size(); i++) {
 			labelList.add(new MenuLabel(sellMenu, Align.LEFT, offers.get(i), true, 18, 10, 40) {
@@ -477,6 +492,27 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 			});
 
 		}
+		*/
+		
+		// Draw and manage the offers on the sell menu
+		LinkedList<MenuOffer> menuOffers = new LinkedList<MenuOffer>(); // Linked list to keep references to all offers
+		for (int i = 0; i < allOffers.size(); i++) { // For each offer
+			menuOffers.add(new MenuOffer(sellMenu, allOffers.get(i)) {
+				@Override // Override the select function
+				public void select() {
+					this.getOffer().execute(10);
+				}
+			});
+		}
+		
+		
+		// "Trade" options to confirm the decision to trade items
+		MenuLabel tradeLabel = new MenuLabel(sellMenu, Align.LEFT, "Trade", true, 24, 10, 40) {
+			@Override //overriding the select function of the label
+			public void select() {
+				
+			}
+		};
 		
 		MenuLabel ml7 = new MenuLabel(sellMenu, Align.LEFT, "Back", true, 24, 10, 40) {
 			@Override

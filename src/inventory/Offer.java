@@ -18,6 +18,13 @@ public class Offer {
 		this.output = output;					// Item output Quantity
 	}
 	
+	// Execute the offer (Do the trade) for a specific double quantity
+	public void execute(double quantity) {
+		
+	
+		
+	}
+	
 	// Get method that returns the input item for offer
 	public Itemizable getInput() {
 		return input; // Return the input item
