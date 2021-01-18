@@ -1,6 +1,10 @@
 package inventory;
 
-import java.util.LinkedList;import javafx.geometry.VPos;
+import java.util.LinkedList;
+
+import application.Inventory;
+import application.Planet;
+import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -43,9 +47,25 @@ public class InventoryAdv {
 		visible = false;
 	}
 	
+	// Method to add an item (Defaults to 1 of the item)
 	public static void addItem(Itemizable item) {
 		items.add(item);
 		quantity.add(1);
+	}
+	
+	// Method to add an item with a specific quantity
+	public static void addItem(Itemizable item, Integer itemQuantity) {
+		// TODO: This doesn't stack items and isn't a good data structure, switch to hashMap
+		items.add(item);
+		quantity.add(itemQuantity);
+	}
+	
+	// Method to collect resources from a planet
+	public static void collectPlanetaryResources(Planet planet) {
+		// TODO: We need to make sure this doesn't add to players past the stack size
+		addItem(planet.getPrimaryType(), planet.getPrimaryAmount());
+		addItem(planet.getSecondaryType(), planet.getSecondaryAmount());
+		planet.emptyResources();
 	}
 	
 	public static void setSize(int newX, int newY, int numberOfItems) {

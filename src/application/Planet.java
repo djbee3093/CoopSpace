@@ -19,8 +19,11 @@ import menu.MenuToolTip;
 import ships.Fighter;
 import ships.Protector;
 import ships.Ship;
+import items.Material;
 
 import java.util.Random;
+
+import inventory.InventoryAdv;
 
 public class Planet extends Sprite implements Focusable, TakesDamage{
 
@@ -34,12 +37,17 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 	private int health;
 	private int maxHealth;
 	
+	
+	private Material primaryMaterial;
+	// These are going to be phased out for the package inventory classes
 	private double primaryProg;
 	private int primaryRegen = 5;
 	private Resource primary = Resource.PRIMARY;		// Type of primary resource
 	private int primaryResource;	// Amount of primary resource
 	private int primaryStorage;		// Max amount of primary resource storage
 	
+	private Material secondaryMaterial;
+	// These are going to be phased out for the package inventory classes
 	private double secondaryProg;
 	private int secondaryRegen = 10;
 	private Resource secondary = Resource.SECONDARY;		// Type of secondary resource
@@ -114,11 +122,21 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		secondaryResource = 0;		// Set amount to 0
 	}
 	
+	// Sets the resources of a new planet 
+	public void setResources(Material primaryMaterial, Material secondaryMaterial) {
+		this.primaryMaterial = primaryMaterial; // Set the type of primary
+		primaryResource = 0; 					// Set the amount to 0
+		
+		this.secondaryMaterial = secondaryMaterial; // Set the type of secondary
+		secondaryResource = 0;						// Set the amount to 0
+	}
+
+	
 	//----------------- Primary Resource Methods -------------------
 	
 	// Returns the primary type of resource
-	public Resource getPrimaryType() {
-		return primary;
+	public Material getPrimaryType() {
+		return primaryMaterial;
 	}
 	
 	// Sets the amount of primary resource
@@ -159,8 +177,8 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 	// ------------------ Secondary Resource methods ----------------
 	
 	// Returns the secondary type of resource
-	public Resource getSecondaryType() {
-		return secondary;
+	public Material getSecondaryType() {
+		return secondaryMaterial;
 	}
 	
 	// Sets the amount of secondary resource
@@ -564,7 +582,7 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		new MenuLabel(mainMenu, Align.LEFT, "Collect", true, 24, 200, 30) {
 			@Override
 			public void select() {
-				Inventory.collectResources(planet);
+				InventoryAdv.collectPlanetaryResources(planet);
 			}
 		};
 		
@@ -680,6 +698,7 @@ public class Planet extends Sprite implements Focusable, TakesDamage{
 		return y;
 		
 	}
+
 
 
 

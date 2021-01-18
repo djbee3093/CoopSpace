@@ -71,6 +71,7 @@ public class Game{
 		earth.setCanvas(gameCanvas);
 		earth.setName("Earth");
 		earth.setResources(Resource.OXYGEN, Resource.CARBON);
+		earth.setResources(new Material(MaterialType.OXYGEN), new Material(MaterialType.CARBON));
 		earth.setPrimaryAmount(150);
 		earth.setPrimaryMax(200);
 		earth.setSecondaryAmount(75);

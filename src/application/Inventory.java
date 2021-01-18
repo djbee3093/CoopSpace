@@ -67,13 +67,13 @@ public class Inventory{
 	}
 	
 	// This can be called to collect a planets resources
-	public static void collectResources(Planet planet) {
+	//public static void collectResources(Planet planet) {
 		//TODO: This doesn't properly update inventory, though it does empty planet
-		Inventory.addResource(planet.getPrimaryType(), planet.getPrimaryAmount());		// Collect primary resource
-		Inventory.addResource(planet.getSecondaryType(), planet.getSecondaryAmount());	// Collect secondary resource
-		planet.emptyResources();	// Call emptyResources to reset the planets resources to 0
+	//	Inventory.addResource(planet.getPrimaryType(), planet.getPrimaryAmount());		// Collect primary resource
+	//	Inventory.addResource(planet.getSecondaryType(), planet.getSecondaryAmount());	// Collect secondary resource
+	//	planet.emptyResources();	// Call emptyResources to reset the planets resources to 0
 
-	}
+	//}
 	
 	public static void attach(Planet planet) {
 		inventoryMenu.linkPlanet(planet);
