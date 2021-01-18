@@ -35,6 +35,12 @@ public class Material implements Itemizable{
 		gc.restore();
 	}
 	
+	// To string just returns the material type
+	@Override
+	public String toString() {
+		return type.toString(); // Return type of material
+	}
+	
 	private String getType() {
 		if (type == MaterialType.ALUMINUM) {
 			return "Al";
