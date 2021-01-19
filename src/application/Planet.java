@@ -20,9 +20,9 @@ import menu.MenuToolTip;
 import ships.Fighter;
 import ships.Protector;
 import ships.Ship;
-import items.Material;
 import items.MaterialType;
 import items.Money;
+import items.Material;
 
 import java.util.Random;
 

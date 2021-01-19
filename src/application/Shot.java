@@ -18,7 +18,7 @@ public class Shot extends Sprite {
 		double[] vel = calcVector(orientation, shotSpeed);
 		xVel = vel[0] + player.getXVel(); yVel = vel[1] * -1 + player.getYVel();
 		width = 10;
-		height = 10;
+		height = 50;
 	}
 
 	@Override

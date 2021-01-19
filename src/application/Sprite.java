@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 import javafx.scene.transform.Affine;
 import javafx.scene.transform.Rotate;
 
@@ -134,7 +135,8 @@ public abstract class Sprite {
 		GraphicsContext gc = gameCanvas.getGraphicsContext2D();
 		gc.save();
 		gc.transform(new Affine(new Rotate(orientation, trans[0], trans[1])));
-		
+		gc.setFill(Color.RED);
+
 		if (img != null) 
 			gc.drawImage(img, trans[0] - (img.getWidth()/2), trans[1] - (img.getHeight()/2));	
 		else 
